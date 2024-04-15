@@ -27,18 +27,22 @@ export default function Navbar() {
             </span>
           </a>
 
-          <div className="hidden w-full md:block md:w-auto" id="navbar-solid-bg">
+          <div id="navbar-solid-bg">
             <ul className="flex flex-col font-medium mt-4 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
               {routes.map((route, index) => (
                 <li
                   key={index}
-                  className="flex items-center py-1 md:py-0 text-white
+                  className="flex items-center py-1 md:py-0 dark:text-white
                 "
                 >
                   <NavLink
                     to={route.path}
                     className={({ isActive, isPending }) =>
-                      isPending ? "pending" : isActive ? "active" : ""
+                      isPending
+                        ? "pending"
+                        : isActive
+                        ? "active text-blue-500 underline " // Aquí añades el estilo para el modo claro y oscuro
+                        : ""
                     }
                   >
                     {route.name}

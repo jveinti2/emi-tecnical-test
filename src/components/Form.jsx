@@ -48,6 +48,7 @@ export default function Form() {
       ]);
       formik.resetForm();
       navigation("/");
+      toast.success("Task created successfully");
     },
   });
 

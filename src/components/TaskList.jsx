@@ -5,14 +5,12 @@ import Task from "./Task";
 export default function TaskList() {
   const { tasks } = useContext(TaskContext);
   const [currentPage, setCurrentPage] = useState(1);
-  const [tasksPerPage] = useState(4); // Cambia este valor según la cantidad de tareas que quieras mostrar por página
+  const [tasksPerPage] = useState(4);
 
-  // Calcular los índices de inicio y fin de las tareas para la página actual
   const indexOfLastTask = currentPage * tasksPerPage;
   const indexOfFirstTask = indexOfLastTask - tasksPerPage;
   const currentTasks = tasks.slice(indexOfFirstTask, indexOfLastTask);
 
-  // Cambiar de página
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
@@ -27,7 +25,11 @@ export default function TaskList() {
         <ul className="inline-flex -space-x-px text-sm">
           <li>
             <a
-              onClick={() => paginate(currentPage - 1)}
+              onClick={() => {
+                if (currentPage > 1) {
+                  paginate(currentPage - 1);
+                }
+              }}
               href="#"
               className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
             >
@@ -47,7 +49,11 @@ export default function TaskList() {
           ))}
           <li>
             <a
-              onClick={() => paginate(currentPage + 1)}
+              onClick={() => {
+                if (currentPage < Math.ceil(tasks.length / tasksPerPage)) {
+                  paginate(currentPage + 1);
+                }
+              }}
               href="#"
               className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
             >

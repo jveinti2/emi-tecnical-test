@@ -5,7 +5,3 @@
 body {
   @apply bg-white;
 }
-
-.active {
-  @apply text-blue-500;
-}
